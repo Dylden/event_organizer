@@ -22,7 +22,8 @@
         <h2>{{ establishment.name }}</h2>
         <h2>{{ establishment.address }}</h2>
         <h2>{{ establishment.description }}</h2>
-
+        <a href="{{ path('establishments_update', { id: establishment.id}) }}" class="btn btn-primary">Update</a>
+        <a href="{{ path('establishments_delete', { id: establishment.id}) }}" class="btn btn-warning">Delete</a>
 
     {% endfor %}
 

@@ -24,7 +24,7 @@ class Establishment
     private ?string $description = null;
 
     #[ORM\OneToMany(mappedBy: "establishment", targetEntity: Room::class)]
-    private Collection $rooms;
+    private Collection $room;
 
     public function getId(): ?int
     {
@@ -68,6 +68,6 @@ class Establishment
     }
 
     public function getRooms(): Collection{
-        return $this->rooms;
+        return $this->room;
     }
 }

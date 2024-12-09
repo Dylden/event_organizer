@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\EventRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -26,14 +27,14 @@ class Event
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $end_time = null;
 
-    #[ORM\ManyToOne(targetEntity: Room::class, inversedBy: Event::class)]
+    #[ORM\ManyToOne(targetEntity: Room::class, inversedBy: 'events')]
     private Room $room;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: Event::class, )]
-    private Category $category;
+    private Collection $categories;
 
     #[ORM\ManyToOne(targetEntity: Animator::class, inversedBy: Event::class)]
-    private Animator $animator;
+    private Collection $animators;
 
     public function getId(): ?int
     {
@@ -92,11 +93,17 @@ class Event
         return $this->room;
     }
 
-    public function getCategory(): ?Category{
-        return $this->category;
+    public function setRoom(Room $room): static
+    {
+        $this->room = $room;
+        return $this;
     }
 
-    public function getAnimator(): ?Animator{
-        return $this->animator;
+    public function getCategory(): Collection{
+        return $this->categories;
+    }
+
+    public function getAnimator(): Collection{
+        return $this->animators;
     }
 }

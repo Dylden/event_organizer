@@ -20,8 +20,8 @@
         {% for tag in tags %}
 
             <h2>{{ tag.name }}</h2>
-            <h2>{{ tag.description }}</h2>
-
+            <a href="{{ path('tags_update', { id: tag.id}) }}" class="btn btn-primary">Update</a>
+            <a href="{{ path('tags_delete', { id: tag.id}) }}" class="btn btn-warning">Delete</a>
         {% endfor %}
 
     </div>

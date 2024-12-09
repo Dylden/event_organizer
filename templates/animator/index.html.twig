@@ -19,8 +19,11 @@
 
         {% for animator in animators %}
 
-            <h2>{{ animator.name }}</h2>
+            <h2>{{ animator.firstname }}</h2>
+            <h2>{{ animator.lastname }}</h2>
 
+            <a href="{{ path('animators_update', { id: animator.id}) }}" class="btn btn-primary">Update</a>
+            <a href="{{ path('animators_delete', { id: animator.id}) }}" class="btn btn-warning">Delete</a>
 
         {% endfor %}
 

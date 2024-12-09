@@ -21,6 +21,9 @@
 
             <h2>{{ room.name }}</h2>
             <h2>{{ room.capacity }}</h2>
+            <a href="{{ path('rooms_update', { id: room.id}) }}" class="btn btn-primary">Update</a>
+            <a href="{{ path('rooms_delete', { id: room.id}) }}" class="btn btn-warning">Delete</a>
+            <a href="{{ path('rooms_show', { id: room.id}) }}" class="btn btn-warning">Show</a>
 
         {% endfor %}
 

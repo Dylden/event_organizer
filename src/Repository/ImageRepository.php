@@ -16,6 +16,20 @@ class ImageRepository extends ServiceEntityRepository
         parent::__construct($registry, Image::class);
     }
 
+    public function findByEstablishments($establishments_id): array{
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT *
+                FROM image
+                INNER JOIN room ON room.id = image.room_id
+            WHERE room.$establishments_id = $establishments_id'
+            )
+            ->setParameter('establishments_id', $establishments_id)
+            ->getResult();
+
+
+    }
+
 //    /**
 //     * @return Image[] Returns an array of Image objects
 //     */

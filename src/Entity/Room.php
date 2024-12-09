@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\RoomRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RoomRepository::class)]
@@ -19,11 +20,14 @@ class Room
     #[ORM\Column]
     private ?int $capacity = null;
 
-    #[ORM\ManyToOne(inversedBy: Establishment::class, targetEntity: Establishment::class)]
+    #[ORM\ManyToOne(inversedBy: 'rooms', targetEntity: Establishment::class)]
     private Establishment $establishment;
 
-    #[ORM\OneToMany(mappedBy: Room::class, targetEntity: Event::class)]
-    private Event $event;
+    #[ORM\OneToMany(mappedBy: 'room', targetEntity: Event::class)]
+    private Collection $events;
+
+    #[ORM\OneToMany(mappedBy: 'room', targetEntity: Image::class)]
+    private Collection $images;
 
     public function getId(): ?int
     {
@@ -64,7 +68,17 @@ class Room
         return $this;
     }
 
-    public function getEvent(): ?Event{
-        return $this->event;
+    public function getEvent(): Collection{
+        return $this->events;
+    }
+
+    public function setEvent(Collection $events): static{
+        $this->events = $events;
+        return $this;
+    }
+
+    public function getImages() : Collection
+    {
+        return $this->images;
     }
 }

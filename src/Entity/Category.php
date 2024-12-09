@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
@@ -20,7 +21,7 @@ class Category
     private ?string $description = null;
 
     #[ORM\OneToMany(mappedBy: Event::class, targetEntity: Event::class)]
-    private Event $event;
+    private Collection $events;
 
     public function getId(): ?int
     {
@@ -51,7 +52,7 @@ class Category
         return $this;
     }
 
-    public function getEvent(): Event{
-        return $this->event;
+    public function getEvent(): Collection{
+        return $this->events;
     }
 }
